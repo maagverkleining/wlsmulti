@@ -385,6 +385,11 @@ footer {
   margin-bottom: 0.2rem;
 }
 
+.badge--sleeve {
+  background: #f3f4f6;
+  color: var(--color-muted);
+}
+
 /* ══════════════════════════════════════════════════════════════════════════════
    DESKTOP TABLE
    ══════════════════════════════════════════════════════════════════════════════ */
@@ -514,7 +519,32 @@ td.center {
 .buy-btn--full {
   display: block;
   text-align: center;
+}
+
+/* ── Dual buy options ─────────────────────────────────────────────────────── */
+
+.buy-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
+.buy-options--full {
+  align-items: stretch;
   margin-top: 0.75rem;
+}
+
+.buy-direct {
+  font-size: 12px;
+  color: var(--color-muted);
+  text-decoration: none;
+  padding-left: 2px;
+}
+
+.buy-direct:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════

@@ -103,7 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const top3Container = document.getElementById('top3-cards');
   if (top3Container && typeof vitamins !== 'undefined') {
-    const sorted = [...vitamins].sort((a, b) => pricePerPill(a) - pricePerPill(b));
+    const sorted = [...vitamins]
+      .filter(v => v.pillsPerDay === 1 && v.iron >= 45 && v.surgery.includes('bypass'))
+      .sort((a, b) => pricePerPill(a) - pricePerPill(b));
     const top3 = sorted.slice(0, 3);
 
     top3Container.innerHTML = top3.map(v => `
@@ -235,14 +237,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Table ─────────────────────────────────────────────────────────────────
 
-  function buildBadge(badge) {
-    if (!badge) return '';
-    return `<span class="badge">${badge}</span>`;
+  function buildBadge(v) {
+    // Sleeve-only warning overrides any existing badge when iron < 45 and not bypass
+    if (v.iron < 45 && !v.surgery.includes('bypass')) {
+      return '<span class="badge badge--sleeve">Sleeve only</span>';
+    }
+    if (!v.badge) return '';
+    return `<span class="badge">${v.badge}</span>`;
   }
 
-  function buildFormIcon(form) {
-    const icons = { capsule: '💊', chewable: '🍬', 'dissolving tablet': '💧' };
-    return icons[form] || '';
+  function formatForm(form) {
+    const labels = { capsule: 'Capsule', chewable: 'Chewable', 'dissolving tablet': 'Dissolving' };
+    return labels[form] || form;
+  }
+
+  function buildBuyButtons(v, fullWidth) {
+    const fullClass = fullWidth ? ' buy-btn--full' : '';
+    return `
+      <div class="buy-options${fullWidth ? ' buy-options--full' : ''}">
+        <a
+          href="${v.amazonUrl}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="buy-btn${fullClass}"
+          aria-label="Buy ${v.name} on Amazon"
+        >Buy on Amazon</a>
+        <a
+          href="${v.url}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="buy-direct"
+          aria-label="Buy ${v.name} direct from brand"
+        >Buy direct →</a>
+      </div>
+    `;
   }
 
   function renderTable() {
@@ -275,26 +303,18 @@ document.addEventListener('DOMContentLoaded', () => {
           ${data.map((v, i) => `
             <tr class="${i % 2 === 1 ? 'alt-row' : ''}">
               <td class="name-cell">
-                ${buildBadge(v.badge)}
+                ${buildBadge(v)}
                 <span class="product-name">${v.name}</span>
                 <span class="product-brand">${v.brand}</span>
               </td>
-              <td class="hide-mobile">${buildFormIcon(v.form)} ${v.form}</td>
+              <td class="hide-mobile">${formatForm(v.form)}</td>
               <td class="hide-mobile center">${v.pillsPerDay}</td>
               <td class="hide-mobile center">${v.iron}</td>
               <td class="hide-mobile center">${v.b12}</td>
               <td class="ppp-cell">${formatPPP(v)}</td>
               <td class="hide-mobile center">${formatMonthly(v)}</td>
               <td>${v.coupon ? buildCouponChip(v.coupon) : '—'}</td>
-              <td>
-                <a
-                  href="${v.url}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="buy-btn"
-                  aria-label="Buy ${v.name}"
-                >Buy</a>
-              </td>
+              <td>${buildBuyButtons(v, false)}</td>
             </tr>
           `).join('')}
         </tbody>
@@ -306,14 +326,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ${data.map(v => `
           <div class="vitamin-card">
             <div class="card-header">
-              ${buildBadge(v.badge)}
+              ${buildBadge(v)}
               <span class="product-name">${v.name}</span>
               <span class="product-brand">${v.brand}</span>
             </div>
             <dl class="card-details">
               <div class="card-row">
                 <dt>Form</dt>
-                <dd>${buildFormIcon(v.form)} ${v.form}</dd>
+                <dd>${formatForm(v.form)}</dd>
               </div>
               <div class="card-row">
                 <dt>Pills/day</dt>
@@ -341,13 +361,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <dd>${buildCouponChip(v.coupon)}</dd>
               </div>` : ''}
             </dl>
-            <a
-              href="${v.url}"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="buy-btn buy-btn--full"
-              aria-label="Buy ${v.name}"
-            >Buy →</a>
+            ${buildBuyButtons(v, true)}
           </div>
         `).join('')}
       </div>
