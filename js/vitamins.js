@@ -15,6 +15,7 @@ const vitamins = [
     discount: 15,
     url: "https://procarenow.com",
     amazonUrl: "https://www.amazon.com/dp/B01GK82TWW?tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/7174RGNte-L._AC_SL300_.jpg",
     badge: "Best value"
   },
   {
@@ -31,6 +32,7 @@ const vitamins = [
     discount: 10,
     url: "https://barimelts.com",
     amazonUrl: "https://www.amazon.com/dp/B08NFTHBPX?tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/71Vs-RnwD2L._AC_SL300_.jpg",
     badge: ""
   },
   {
@@ -47,6 +49,7 @@ const vitamins = [
     discount: 10,
     url: "https://celebratevitamins.com",
     amazonUrl: "https://www.amazon.com/dp/B07P761SGP?tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/61WKlOxvekL._AC_SL300_.jpg",
     badge: ""
   },
   {
@@ -63,6 +66,7 @@ const vitamins = [
     discount: 0,
     url: "https://bariatricadvantage.com",
     amazonUrl: "https://www.amazon.com/dp/B08LQX7V5B?tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/71peQRs5H+L._AC_SL300_.jpg",
     badge: "High thiamin"
   },
   {
@@ -79,6 +83,7 @@ const vitamins = [
     discount: 0,
     url: "https://bariatricadvantage.com",
     amazonUrl: "https://www.amazon.com/s?k=bariatric+advantage+chewy+bites&tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/71-jE8VVX+L._AC_SL300_.jpg",
     badge: "Iron-free"
   },
   {
@@ -95,6 +100,7 @@ const vitamins = [
     discount: 0,
     url: "https://bariatricfusion.com",
     amazonUrl: "https://www.amazon.com/dp/B07VXS2MNV?tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/712xDP1OHiL._AC_SL300_.jpg",
     badge: ""
   },
   {
@@ -111,6 +117,7 @@ const vitamins = [
     discount: 0,
     url: "https://store.bariatricpal.com",
     amazonUrl: "https://www.amazon.com/dp/B0CPNCM1T2?tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/715548MLFiL._AC_SL300_.jpg",
     badge: ""
   },
   {
@@ -127,6 +134,7 @@ const vitamins = [
     discount: 0,
     url: "https://naturelo.com",
     amazonUrl: "https://www.amazon.com/s?k=NATURELO+bariatric+multivitamin&tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/81jKCHgkZUL._AC_SL300_.jpg",
     badge: "Whole food"
   },
   {
@@ -143,6 +151,7 @@ const vitamins = [
     discount: 0,
     url: "https://barilife.com",
     amazonUrl: "https://www.amazon.com/s?k=BariLife+Just+One+bariatric&tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/61oUosQCZxL._AC_SL300_.jpg",
     badge: ""
   },
   {
@@ -159,6 +168,7 @@ const vitamins = [
     discount: 10,
     url: "https://celebratevitamins.com",
     amazonUrl: "https://www.amazon.com/dp/B003VVR6WK?tag=wlsmulti-20",
+    image: "https://m.media-amazon.com/images/I/51LjEKpcCuL._AC_SL300_.jpg",
     badge: ""
   }
 ];

@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     top3Container.innerHTML = top3.map(v => `
       <div class="top3-card">
+        <div class="top3-img">${buildProductImg(v, 80)}</div>
         <div class="top3-price">${formatPPP(v)}</div>
         <div class="top3-name">${v.name}</div>
         <div class="top3-brand">${v.brand}</div>
@@ -237,6 +238,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Table ─────────────────────────────────────────────────────────────────
 
+  function buildProductImg(v, size) {
+    const fallback = 'https://placehold.co/300x300/f0fdf4/0F6E56?text=Photo+coming';
+    const src = v.image || fallback;
+    return `<img
+      src="${src}"
+      alt="${v.name} bariatric multivitamin"
+      width="${size}"
+      height="${size}"
+      loading="lazy"
+      class="product-img"
+      onerror="this.onerror=null;this.src='${fallback}'"
+    >`;
+  }
+
   function buildBadge(v) {
     // Sleeve-only warning overrides any existing badge when iron < 45 and not bypass
     if (v.iron < 45 && !v.surgery.includes('bypass')) {
@@ -288,6 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <table class="vitamin-table" aria-label="Bariatric vitamin comparison">
         <thead>
           <tr>
+            <th scope="col" class="col-photo hide-mobile" aria-label="Product photo"></th>
             <th scope="col">Product</th>
             <th scope="col" class="hide-mobile">Form</th>
             <th scope="col" class="hide-mobile">Pills/day</th>
@@ -302,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <tbody>
           ${data.map((v, i) => `
             <tr class="${i % 2 === 1 ? 'alt-row' : ''}">
+              <td class="col-photo hide-mobile">${buildProductImg(v, 56)}</td>
               <td class="name-cell">
                 ${buildBadge(v)}
                 <span class="product-name">${v.name}</span>
@@ -326,9 +343,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ${data.map(v => `
           <div class="vitamin-card">
             <div class="card-header">
-              ${buildBadge(v)}
-              <span class="product-name">${v.name}</span>
-              <span class="product-brand">${v.brand}</span>
+              <div class="card-header-text">
+                ${buildBadge(v)}
+                <span class="product-name">${v.name}</span>
+                <span class="product-brand">${v.brand}</span>
+              </div>
+              <div class="card-header-img">${buildProductImg(v, 72)}</div>
             </div>
             <dl class="card-details">
               <div class="card-row">
