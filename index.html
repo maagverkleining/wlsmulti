@@ -73,11 +73,15 @@
 <body>
 
   <header>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/compare.html">Compare</a>
-      <a href="/about.html">About</a>
-    </nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">WLS Multi</a>
+      <button class="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <nav id="nav-links" class="nav-links" aria-label="Main navigation">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/compare.html">Compare</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -93,18 +97,21 @@
           <span class="surgery-icon" aria-hidden="true">🔄</span>
           <span class="surgery-title">Gastric Bypass</span>
           <span class="surgery-sub">45mg iron · once daily · B12 1000mcg+</span>
+          <span class="surgery-arrow" aria-hidden="true">→</span>
         </a>
 
         <a href="/compare.html#sleeve" class="surgery-card" role="listitem" aria-label="Compare vitamins for gastric sleeve">
           <span class="surgery-icon" aria-hidden="true">💊</span>
           <span class="surgery-title">Gastric Sleeve</span>
           <span class="surgery-sub">18mg iron · once daily · B12 1000mcg+</span>
+          <span class="surgery-arrow" aria-hidden="true">→</span>
         </a>
 
         <a href="/compare.html#mini-bypass" class="surgery-card" role="listitem" aria-label="Compare vitamins for mini bypass">
           <span class="surgery-icon" aria-hidden="true">⚡</span>
           <span class="surgery-title">Mini Bypass</span>
           <span class="surgery-sub">45mg iron · once daily · B12 1000mcg+</span>
+          <span class="surgery-arrow" aria-hidden="true">→</span>
         </a>
 
       </div>
@@ -115,7 +122,6 @@
       <h2>Cheapest bariatric vitamins per pill</h2>
       <p>These three multivitamins offer the lowest price per pill while meeting ASMBS nutritional guidelines.</p>
       <div id="top3-cards" class="top3-cards"></div>
-      <!-- Aria live region for coupon clipboard -->
       <div id="clipboard-announce" role="status" aria-live="polite"></div>
     </section>
 
@@ -192,7 +198,24 @@
   </main>
 
   <footer>
-    <p>© 2025 WLS Multi · By David Gans · Affiliate disclosure: we earn commissions at no extra cost to you</p>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <p class="footer-brand">WLS Multi</p>
+        <p>Independent bariatric vitamin comparisons.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Navigation</p>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="/">Home</a>
+          <a href="/compare.html">Compare</a>
+          <a href="/about.html">About</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Disclosure</p>
+        <p>We earn affiliate commissions at no extra cost to you. David Gans is not a medical professional. Always consult your surgeon.</p>
+      </div>
+    </div>
   </footer>
 
   <script src="/js/vitamins.js" defer></script>

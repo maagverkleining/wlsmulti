@@ -2,6 +2,30 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Mobile hamburger menu ─────────────────────────────────────────────────
+
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks  = document.getElementById('nav-links');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('is-open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      hamburger.textContent = isOpen ? '✕' : '☰';
+      hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    });
+
+    // Close menu when a nav link is clicked (mobile UX)
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.textContent = '☰';
+        hamburger.setAttribute('aria-label', 'Open navigation menu');
+      });
+    });
+  }
+
   // ── Shared helpers ────────────────────────────────────────────────────────
 
   function pricePerPill(v) {
@@ -259,14 +283,14 @@ document.addEventListener('DOMContentLoaded', () => {
               <td class="hide-mobile center">${v.pillsPerDay}</td>
               <td class="hide-mobile center">${v.iron}</td>
               <td class="hide-mobile center">${v.b12}</td>
-              <td class="center"><strong>${formatPPP(v)}</strong></td>
+              <td class="ppp-cell">${formatPPP(v)}</td>
               <td class="hide-mobile center">${formatMonthly(v)}</td>
               <td>${v.coupon ? buildCouponChip(v.coupon) : '—'}</td>
               <td>
                 <a
                   href="${v.url}"
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   class="buy-btn"
                   aria-label="Buy ${v.name}"
                 >Buy</a>
@@ -320,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <a
               href="${v.url}"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
               class="buy-btn buy-btn--full"
               aria-label="Buy ${v.name}"
             >Buy →</a>

@@ -52,11 +52,15 @@
 <body>
 
   <header>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/compare.html">Compare</a>
-      <a href="/about.html">About</a>
-    </nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">WLS Multi</a>
+      <button class="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <nav id="nav-links" class="nav-links" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/compare.html" aria-current="page">Compare</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -65,14 +69,30 @@
 
     <div id="filter-bar"></div>
 
-    <!-- Aria live region for clipboard announcements -->
     <div id="clipboard-announce" role="status" aria-live="polite"></div>
 
     <div id="vitamin-table"></div>
   </main>
 
   <footer>
-    <p>© 2025 WLS Multi · By David Gans · Affiliate disclosure: we earn commissions at no extra cost to you</p>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <p class="footer-brand">WLS Multi</p>
+        <p>Independent bariatric vitamin comparisons.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Navigation</p>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="/">Home</a>
+          <a href="/compare.html">Compare</a>
+          <a href="/about.html">About</a>
+        </nav>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Disclosure</p>
+        <p>We earn affiliate commissions at no extra cost to you. David Gans is not a medical professional. Always consult your surgeon.</p>
+      </div>
+    </div>
   </footer>
 
   <script src="/js/vitamins.js" defer></script>
