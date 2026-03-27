@@ -12,7 +12,13 @@
   --color-bg: #ffffff;
   --color-text: #1a1a1a;
   --color-muted: #6b7280;
+  --color-row-alt: #f8faf9;
+  --color-row-hover: #edf7f3;
+  --color-badge-bg: #d1fae5;
+  --color-badge-text: #065f46;
+  --color-coupon-bg: #ecfdf5;
   --font-main: system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace;
 }
 
 /* Base */
@@ -27,8 +33,7 @@ body {
 /* Layout */
 header,
 main,
-footer,
-nav {
+footer {
   width: 100%;
   max-width: 1100px;
   margin-left: auto;
@@ -61,8 +66,6 @@ nav {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 nav a {
@@ -89,15 +92,297 @@ p {
   color: var(--color-text);
 }
 
-/* Responsive */
+/* Responsive typography */
 @media (min-width: 640px) {
-  h1 {
-    font-size: 2.25rem;
-  }
+  h1 { font-size: 2.25rem; }
+}
+@media (min-width: 1024px) {
+  h1 { font-size: 2.5rem; }
 }
 
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 2.5rem;
+/* ── Filter bar ───────────────────────────────────────────────────────────── */
+
+#filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  border-bottom: 1px solid #e5e7eb;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-family: var(--font-main);
+}
+
+.filter-btn:hover {
+  background: #e6f4f0;
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.sort-label {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+#sort-select {
+  font-size: 0.875rem;
+  font-family: var(--font-main);
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  cursor: pointer;
+}
+
+/* ── Badge ────────────────────────────────────────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--color-badge-bg);
+  color: var(--color-badge-text);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+/* ── Desktop table ────────────────────────────────────────────────────────── */
+
+.vitamin-table {
+  display: none; /* hidden on mobile, shown at 768px+ */
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.vitamin-table thead th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  border-bottom: 2px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.vitamin-table tbody td {
+  padding: 0.75rem 0.75rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.vitamin-table tbody tr.alt-row {
+  background: var(--color-row-alt);
+}
+
+.vitamin-table tbody tr:hover {
+  background: var(--color-row-hover);
+}
+
+.name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 160px;
+}
+
+.product-name {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product-brand {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+td.center {
+  text-align: center;
+}
+
+/* ── Coupon chip ──────────────────────────────────────────────────────────── */
+
+.coupon-chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--color-coupon-bg);
+  border: 1px dashed var(--color-accent);
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.coupon-chip:hover {
+  background: #d1fae5;
+}
+
+.coupon-chip.copied {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+/* ── Buy button ───────────────────────────────────────────────────────────── */
+
+.buy-btn {
+  display: inline-block;
+  background: var(--color-primary);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.buy-btn:hover {
+  background: var(--color-accent);
+}
+
+.buy-btn--full {
+  display: block;
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+/* ── Mobile cards ─────────────────────────────────────────────────────────── */
+
+.vitamin-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vitamin-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--color-bg);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 0.9rem;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.card-row:last-child {
+  border-bottom: none;
+}
+
+.card-row dt {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.card-row.highlight {
+  background: #f8faf9;
+  margin: 0 -0.25rem;
+  padding: 0.35rem 0.25rem;
+  border-radius: 4px;
+}
+
+/* ── Aria live region ─────────────────────────────────────────────────────── */
+
+#clipboard-announce {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* ── No results ───────────────────────────────────────────────────────────── */
+
+.no-results {
+  color: var(--color-muted);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+/* ── 768px+ breakpoint: switch to table ───────────────────────────────────── */
+
+@media (min-width: 768px) {
+  .vitamin-table {
+    display: table;
+  }
+
+  .vitamin-cards {
+    display: none;
+  }
+
+  .hide-mobile {
+    /* columns are already visible in table */
   }
 }
