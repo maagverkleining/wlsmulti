@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compare Bariatric Vitamins by Surgery Type | WLS Multi</title>
-  <meta name="description" content="Find the best multivitamin for gastric bypass, gastric sleeve, or mini bypass — compared by price per pill, daily dose, and iron content.">
+  <meta name="description" content="Find the best multivitamin for gastric bypass, gastric sleeve, or mini bypass — compared by price per pill, daily dose, and iron content. Updated monthly.">
   <link rel="canonical" href="https://wlsmulti.com/">
 
   <!-- Open Graph -->
@@ -13,11 +13,58 @@
   <meta property="og:url" content="https://wlsmulti.com/">
   <meta property="og:image" content="https://wlsmulti.com/images/og-default.jpg">
 
-  <!-- JSON-LD -->
+  <!-- JSON-LD: Article -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article"
+    "@type": "Article",
+    "headline": "Compare Bariatric Vitamins by Surgery Type",
+    "description": "Independent comparison of bariatric multivitamins by price per pill, surgery type, iron content, and daily dose.",
+    "author": {
+      "@type": "Person",
+      "name": "David Gans",
+      "description": "Lost 105 lbs after gastric bypass surgery in January 2024"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "WLS Multi",
+      "url": "https://wlsmulti.com"
+    },
+    "dateModified": "2025-03-27"
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need a different vitamin for bypass vs sleeve?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Gastric bypass patients typically need 45mg iron and higher B12 due to reduced absorption in the small intestine. Sleeve patients often do well with 18mg iron. Always follow your surgeon's advice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate the real cost of a bariatric vitamin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Divide the bottle price by the number of pills, then multiply by your daily dose times 30. A $35 bottle of 60 pills taken twice daily costs $35/month. A $27 bottle of 30 pills taken once daily also costs $27/month — but the per-pill cost is $0.90 vs $0.58."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are coupon codes on WLS Multi always valid?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We verify codes monthly. If a code doesn't work, the brand may have changed it — contact us via the about page and we'll update it within 24 hours."
+        }
+      }
+    ]
   }
   </script>
 
@@ -34,22 +81,121 @@
   </header>
 
   <main>
-    <h1>Compare Bariatric Vitamins by Surgery Type</h1>
-    <p>Find the best multivitamin for gastric bypass, gastric sleeve, or mini bypass — compared by price per pill, daily dose, and iron content.</p>
 
-    <section>
-      <div id="comparison-table"></div>
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <section class="section-hero">
+      <h1>Compare Bariatric Vitamins by Surgery Type</h1>
+      <p class="hero-lead">Find the best multivitamin for gastric bypass, gastric sleeve, or mini bypass — compared by price per pill, daily dose, and iron content. Updated monthly by David Gans, who lost 105 lbs after gastric bypass in January 2024.</p>
+
+      <div class="surgery-cards" role="list">
+
+        <a href="/compare.html#bypass" class="surgery-card" role="listitem" aria-label="Compare vitamins for gastric bypass">
+          <span class="surgery-icon" aria-hidden="true">🔄</span>
+          <span class="surgery-title">Gastric Bypass</span>
+          <span class="surgery-sub">45mg iron · once daily · B12 1000mcg+</span>
+        </a>
+
+        <a href="/compare.html#sleeve" class="surgery-card" role="listitem" aria-label="Compare vitamins for gastric sleeve">
+          <span class="surgery-icon" aria-hidden="true">💊</span>
+          <span class="surgery-title">Gastric Sleeve</span>
+          <span class="surgery-sub">18mg iron · once daily · B12 1000mcg+</span>
+        </a>
+
+        <a href="/compare.html#mini-bypass" class="surgery-card" role="listitem" aria-label="Compare vitamins for mini bypass">
+          <span class="surgery-icon" aria-hidden="true">⚡</span>
+          <span class="surgery-title">Mini Bypass</span>
+          <span class="surgery-sub">45mg iron · once daily · B12 1000mcg+</span>
+        </a>
+
+      </div>
     </section>
 
-    <section>
-      <!-- Featured brands placeholder -->
+    <!-- ── Top 3 cheapest ─────────────────────────────────────────────── -->
+    <section class="section-top3">
+      <h2>Cheapest bariatric vitamins per pill</h2>
+      <p>These three multivitamins offer the lowest price per pill while meeting ASMBS nutritional guidelines.</p>
+      <div id="top3-cards" class="top3-cards"></div>
+      <!-- Aria live region for coupon clipboard -->
+      <div id="clipboard-announce" role="status" aria-live="polite"></div>
     </section>
+
+    <!-- ── Why trust us ───────────────────────────────────────────────── -->
+    <section class="section-trust">
+      <h2>Why trust WLS Multi?</h2>
+      <div class="trust-grid">
+
+        <div class="trust-item">
+          <span class="trust-check" aria-hidden="true">✓</span>
+          <div>
+            <strong class="trust-title">Independent</strong>
+            <p>No brand owns this site. We compare all major bariatric vitamins objectively.</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-check" aria-hidden="true">✓</span>
+          <div>
+            <strong class="trust-title">From experience</strong>
+            <p>David lost 105 lbs after gastric bypass. He takes these vitamins daily.</p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-check" aria-hidden="true">✓</span>
+          <div>
+            <strong class="trust-title">Updated monthly</strong>
+            <p>Prices and formulations change. We check and update every 30 days.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── FAQ accordion ──────────────────────────────────────────────── -->
+    <section class="section-faq">
+      <h2>Common questions</h2>
+      <div class="faq-list" id="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Do I need a different vitamin for bypass vs sleeve?
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Yes. Gastric bypass patients typically need 45mg iron and higher B12 due to reduced absorption in the small intestine. Sleeve patients often do well with 18mg iron. Always follow your surgeon's advice.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How do I calculate the real cost of a bariatric vitamin?
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>Divide the bottle price by the number of pills, then multiply by your daily dose times 30. A $35 bottle of 60 pills taken twice daily costs $35/month. A $27 bottle of 30 pills taken once daily also costs $27/month — but the per-pill cost is $0.90 vs $0.58.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Are coupon codes on WLS Multi always valid?
+            <span class="faq-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="faq-answer" hidden>
+            <p>We verify codes monthly. If a code doesn't work, the brand may have changed it — contact us via the about page and we'll update it within 24 hours.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <footer>
     <p>© 2025 WLS Multi · By David Gans · Affiliate disclosure: we earn commissions at no extra cost to you</p>
   </footer>
 
+  <script src="/js/vitamins.js" defer></script>
   <script src="/js/main.js" defer></script>
 </body>
 </html>

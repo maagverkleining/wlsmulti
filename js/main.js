@@ -1,10 +1,8 @@
 // wlsmulti.com main JS
 
 document.addEventListener('DOMContentLoaded', () => {
-  let activeFilter = 'all';
-  let activeSort = 'price-per-pill';
 
-  // ── Helpers ──────────────────────────────────────────────────────────────
+  // ── Shared helpers ────────────────────────────────────────────────────────
 
   function pricePerPill(v) {
     return v.price / v.pillCount;
@@ -22,22 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return '$' + Math.round(monthlyCost(v)) + '/mo';
   }
 
-  function getFiltered() {
-    return vitamins.filter(v =>
-      activeFilter === 'all' || v.surgery.includes(activeFilter)
-    );
-  }
-
-  function getSorted(list) {
-    return [...list].sort((a, b) => {
-      switch (activeSort) {
-        case 'price-per-pill': return pricePerPill(a) - pricePerPill(b);
-        case 'monthly-cost':   return monthlyCost(a) - monthlyCost(b);
-        case 'iron':           return b.iron - a.iron;
-        case 'b12':            return b.b12 - a.b12;
-        default:               return 0;
-      }
-    });
+  function buildCouponChip(coupon) {
+    if (!coupon) return '';
+    return `<button
+      class="coupon-chip"
+      aria-label="Copy coupon code ${coupon}"
+      data-coupon="${coupon}"
+    >${coupon}</button>`;
   }
 
   // ── Clipboard ─────────────────────────────────────────────────────────────
@@ -74,6 +63,89 @@ document.addEventListener('DOMContentLoaded', () => {
     try { document.execCommand('copy'); } catch (e) {}
     document.body.removeChild(ta);
     cb();
+  }
+
+  function bindCouponChips(container) {
+    container.querySelectorAll('.coupon-chip').forEach(btn => {
+      btn.addEventListener('click', () => copyToClipboard(btn.dataset.coupon, btn));
+    });
+  }
+
+  // ════════════════════════════════════════════════════════════════════════════
+  // HOMEPAGE
+  // ════════════════════════════════════════════════════════════════════════════
+
+  // ── Top 3 cheapest ────────────────────────────────────────────────────────
+
+  const top3Container = document.getElementById('top3-cards');
+  if (top3Container && typeof vitamins !== 'undefined') {
+    const sorted = [...vitamins].sort((a, b) => pricePerPill(a) - pricePerPill(b));
+    const top3 = sorted.slice(0, 3);
+
+    top3Container.innerHTML = top3.map(v => `
+      <div class="top3-card">
+        <div class="top3-price">${formatPPP(v)}</div>
+        <div class="top3-name">${v.name}</div>
+        <div class="top3-brand">${v.brand}</div>
+        <div class="top3-meta">${v.form} · ${v.pillsPerDay} per day · ${v.iron}mg iron</div>
+        <div class="top3-footer">
+          ${buildCouponChip(v.coupon)}
+          <a href="/compare.html" class="top3-link">See full comparison →</a>
+        </div>
+      </div>
+    `).join('');
+
+    bindCouponChips(top3Container);
+  }
+
+  // ── FAQ accordion ─────────────────────────────────────────────────────────
+
+  const faqList = document.getElementById('faq-list');
+  if (faqList) {
+    faqList.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+        // Close all
+        faqList.querySelectorAll('.faq-question').forEach(other => {
+          other.setAttribute('aria-expanded', 'false');
+          const answer = other.nextElementSibling;
+          if (answer) answer.hidden = true;
+        });
+
+        // If it was closed, open this one
+        if (!isOpen) {
+          btn.setAttribute('aria-expanded', 'true');
+          const answer = btn.nextElementSibling;
+          if (answer) answer.hidden = false;
+        }
+      });
+    });
+  }
+
+  // ════════════════════════════════════════════════════════════════════════════
+  // COMPARE PAGE
+  // ════════════════════════════════════════════════════════════════════════════
+
+  let activeFilter = 'all';
+  let activeSort = 'price-per-pill';
+
+  function getFiltered() {
+    return vitamins.filter(v =>
+      activeFilter === 'all' || v.surgery.includes(activeFilter)
+    );
+  }
+
+  function getSorted(list) {
+    return [...list].sort((a, b) => {
+      switch (activeSort) {
+        case 'price-per-pill': return pricePerPill(a) - pricePerPill(b);
+        case 'monthly-cost':   return monthlyCost(a) - monthlyCost(b);
+        case 'iron':           return b.iron - a.iron;
+        case 'b12':            return b.b12 - a.b12;
+        default:               return 0;
+      }
+    });
   }
 
   // ── Filter bar ────────────────────────────────────────────────────────────
@@ -144,15 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<span class="badge">${badge}</span>`;
   }
 
-  function buildCoupon(v) {
-    if (!v.coupon) return '—';
-    return `<button
-      class="coupon-chip"
-      aria-label="Copy coupon code ${v.coupon}"
-      data-coupon="${v.coupon}"
-    >${v.coupon}</button>`;
-  }
-
   function buildFormIcon(form) {
     const icons = { capsule: '💊', chewable: '🍬', 'dissolving tablet': '💧' };
     return icons[form] || '';
@@ -169,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Desktop table
     const tableHTML = `
       <table class="vitamin-table" aria-label="Bariatric vitamin comparison">
         <thead>
@@ -199,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <td class="hide-mobile center">${v.b12}</td>
               <td class="center"><strong>${formatPPP(v)}</strong></td>
               <td class="hide-mobile center">${formatMonthly(v)}</td>
-              <td>${buildCoupon(v)}</td>
+              <td>${v.coupon ? buildCouponChip(v.coupon) : '—'}</td>
               <td>
                 <a
                   href="${v.url}"
@@ -215,7 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </table>
     `;
 
-    // Mobile cards
     const cardsHTML = `
       <div class="vitamin-cards" aria-label="Bariatric vitamin comparison">
         ${data.map(v => `
@@ -253,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
               ${v.coupon ? `
               <div class="card-row">
                 <dt>Coupon</dt>
-                <dd>${buildCoupon(v)}</dd>
+                <dd>${buildCouponChip(v.coupon)}</dd>
               </div>` : ''}
             </dl>
             <a
@@ -269,17 +330,14 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     container.innerHTML = tableHTML + cardsHTML;
-
-    // Coupon click handlers
-    container.querySelectorAll('.coupon-chip').forEach(btn => {
-      btn.addEventListener('click', () => {
-        copyToClipboard(btn.dataset.coupon, btn);
-      });
-    });
+    bindCouponChips(container);
   }
 
-  // ── Init ──────────────────────────────────────────────────────────────────
+  // ── Init compare page ─────────────────────────────────────────────────────
 
-  renderFilterBar();
-  renderTable();
+  if (document.getElementById('filter-bar') && typeof vitamins !== 'undefined') {
+    renderFilterBar();
+    renderTable();
+  }
+
 });
